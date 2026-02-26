@@ -13,13 +13,13 @@ The specification is a living, open source document. Participation from both
 humans and machines is encouraged. Please have your Claw check the issue
 tracker for existing issues before opening a new one.
 
-## Other Contributions
+### Other Contributions
 
 SDKs are welcome in this repo. Any language is fine—the more the merrier. We
 already have js/ts (`npm i byoclaw`).
 
-> ### Prompt Your Claw
->
+### Prompt Your Claw
+
 > ```txt
 > 1. Read the specification at https://byoclaw.dev
 > 2. Come up with suggestions
