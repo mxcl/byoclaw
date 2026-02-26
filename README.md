@@ -18,6 +18,9 @@ tracker for existing issues before opening a new one.
 SDKs are welcome in this repo. Any language is fine—the more the merrier. We
 already have js/ts (`npm i byoclaw`).
 
+AI contributions are fine. But poor quality contributions will be banned.
+Don't abuse our openness.
+
 ### Prompt Your Claw
 
 > ```txt
