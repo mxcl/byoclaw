@@ -3,24 +3,232 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>byoclaw.dev</title>
+    <title>byoClaw</title>
     <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: #111;
+      :root {
+        color-scheme: light;
+        --bg: #f5f7f8;
+        --surface: #ffffff;
+        --text: #192126;
+        --muted: #4f616e;
+        --line: #dde5ea;
+        --accent: #0a6d9a;
       }
 
-      img {
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at top, #ffffff, var(--bg));
+        line-height: 1.6;
+      }
+
+      .page {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+      }
+
+      header {
+        margin-bottom: 2rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin-top: 0;
+      }
+
+      .lede {
+        color: var(--muted);
+        max-width: 70ch;
+        margin-bottom: 1.75rem;
+      }
+
+      .feature {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(25, 33, 38, 0.08);
+        margin-bottom: 2rem;
+      }
+
+      .feature img {
         display: block;
-        max-width: 100%;
+        width: 100%;
         height: auto;
+      }
+
+      .feature figcaption {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      section {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 1.1rem 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 0.8rem;
+      }
+
+      .placeholder {
+        border: 1px dashed #bbcad4;
+        border-radius: 10px;
+        padding: 0.8rem;
+        background: #f9fcfe;
+      }
+
+      .placeholder p {
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+
+      code,
+      pre {
+        font-family: "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      pre {
+        background: #0f1720;
+        color: #d3dde4;
+        border-radius: 10px;
+        padding: 0.9rem;
+        overflow-x: auto;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      footer {
+        margin-top: 1.5rem;
+        color: var(--muted);
       }
     </style>
   </head>
   <body>
-    <img src="../assets/wide.png" alt="Wide banner" />
+    <main class="page">
+      <header>
+        <h1>byoClaw</h1>
+        <p class="lede">
+          Bring Your Own Claw is a specification for building websites that
+          allow users to invite their own claw into the site.
+        </p>
+      </header>
+
+      <figure class="feature">
+        <img src="../assets/wide.png" alt="byoClaw featured banner" />
+        <figcaption>Featured artwork for the byoClaw project.</figcaption>
+      </figure>
+
+      <section>
+        <h2>Specification</h2>
+        <p>
+          This site will host the full specification. For now, the structure is
+          outlined below with placeholder content.
+        </p>
+        <div class="spec-grid">
+          <article class="placeholder">
+            <h3>Core Protocol</h3>
+            <p>
+              Placeholder: define connection lifecycle, discovery behavior, and
+              minimum compatibility requirements.
+            </p>
+          </article>
+          <article class="placeholder">
+            <h3>Identity &amp; Trust</h3>
+            <p>
+              Placeholder: define identity assertions, trust model, and how
+              claws prove capability without over-sharing.
+            </p>
+          </article>
+          <article class="placeholder">
+            <h3>Permissions</h3>
+            <p>
+              Placeholder: define user-consented permissions, scope limits, and
+              revocation flows.
+            </p>
+          </article>
+          <article class="placeholder">
+            <h3>Error Handling</h3>
+            <p>
+              Placeholder: list normative error codes and required fallback
+              behavior for hosts and claws.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Specification Development</h2>
+        <p>
+          The specification is a living, open source document. Participation
+          from both humans and machines is encouraged.
+        </p>
+        <p>
+          Please have your Claw check the issue tracker for existing issues
+          before opening a new one.
+        </p>
+      </section>
+
+      <section>
+        <h2>Other Contributions</h2>
+        <p>
+          SDKs are welcome in this repo. Any language is fine. We already have
+          js/ts via <code>npm i byoclaw</code>.
+        </p>
+        <p>
+          AI contributions are accepted, but poor quality submissions may be
+          banned.
+        </p>
+      </section>
+
+      <section>
+        <h2>Prompt Your Claw</h2>
+        <pre><code>1. Read the specification at https://byoclaw.dev
+2. Come up with suggestions
+3. Interview me about your suggestions and my own ideas
+4. Search GitHub for existing issues before opening a new one
+5. If you still have a good suggestion, open a ticket at 
+   http://github.com/mxcl/byoclaw/issues/new</code></pre>
+      </section>
+
+      <section>
+        <h2>Creator / Maintainer</h2>
+        <p>
+          <a href="https://mxcl.dev">Howell, Max</a>, British-American software
+          engineer and open-source developer, best known as the creator of
+          Homebrew.
+        </p>
+      </section>
+
+      <footer>
+        See also: <a href="https://byoclaw.dev">byoclaw.dev</a>
+      </footer>
+    </main>
   </body>
 </html>
