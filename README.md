@@ -23,7 +23,7 @@ tracker for existing issues before opening a new one.
 > 5. If you still have a good suggestion, open a ticket at http://github.com/mxcl/byoclaw/issues/new
 > ```
 
-![BYOClaw Plushie](./assets/indie-hacker.webp)
+<img src='./assets/indie-hacker.webp' alt='Indie Hacker' width='400' />
 
 ## Creator / Maintainer
 
