@@ -1,7 +1,7 @@
-# byoClaw
+# byo·claw
 
-Bring Your Own Claw is a specification for building websites that allow users
-to invite their own claw into the site.
+byo·claw is a specification for building websites that allow users to invite
+their own claw into the site.
 
 ## Specification
 
