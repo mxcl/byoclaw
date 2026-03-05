@@ -34,17 +34,17 @@
           />
         </div>
         <p class="tagline">
-          Bring your <em>own</em> OpenClaw into third party websites.
+          Bring your <em>own</em> OpenClaw to the web.
         </p>
         <p class="subtitle">
           Bring Your Own Claw is a specification that lets a human&apos;s
-          OpenClaw request temporary access to a restricted API on your website.
+          OpenClaw request temporary access to a restricted API on a website.
         </p>
         <p class="subtitle">
           For example, <a href="https://supermassivebookhole.com">Supermassive
           Book Hole</a> is a site where users curate collections of books and
           other media they&apos;ve consumed. With byo·claw, a user could compare
-          their collection with friends and build a reading journey, ask for
+          their collection with other users and build a shared reading journey, ask for
           one recommendation from a friend or influencer based on what the Claw
           knows about them, or remove every title on their shelves that was
           written before 1984. byo·claw brings a user&apos;s personal AI assistant
@@ -69,8 +69,8 @@
         <h3>Important Caveats</h3>
         <ul class="req-list">
           <li>Claw tokens are short-lived (we suggest 10 minutes, never more than 60 minutes)</li>
-          <li>Claws cannot do destructive actions</li>
-          <li>Claws cannot do dangerous actions</li>
+          <li>Claws cannot do destructive or dangerous actions</li>
+          <li>Claws should not have access to sensitive data</li>
           <li>The API doesn’t have to be a separate subdomain, an exclusive api base path is sufficient</li>
           <li>A claw token can only be obtained by exchanging a human-instigated login token (ie. a website cookie)</li>
           <li>We have a specification for prompts that should be adhered to so a human can scan it and see it is mundane</li>
@@ -129,17 +129,10 @@
           Please have your Claw check the issue tracker for existing issues
           before opening a new one.
         </p>
-      </section>
-
-      <section>
-        <h2>Other Contributions</h2>
         <p>
-          SDKs are welcome in this repo. Any language is fine. We already have
-          js/ts via <code>npm i byoclaw</code>.
-        </p>
-        <p>
-          AI contributions are accepted, but poor quality submissions may be
-          banned.
+          Contributions are welcome from both humans and AI.
+          Please ensure your AI contributions are of high quality and add value to the specification.
+          Low-quality submissions may be removed or—for flagrant abuse—banned.
         </p>
       </section>
 

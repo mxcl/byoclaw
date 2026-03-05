@@ -116,6 +116,7 @@ header {
   height: clamp(160px, 22.5vw, 275px);
   width: auto;
   filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.2));
+  transform: translateY(16%);
 }
 
 .tagline {
