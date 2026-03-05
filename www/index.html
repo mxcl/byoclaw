@@ -42,6 +42,8 @@
       </header>
 
       <section>
+        <h2>Specification Version</h2>
+        <p>The byo·claw specification is currently at version 0.1.0</p>
         <h2>Specification Overview</h2>
         <p>
           byo·claw is fundamentally 2 pieces:
@@ -50,18 +52,18 @@
           <li>A restricted, separate api for OpenClaws</li>
           <li>A prompt to a human’s Claw</li>
         </ul>
-        <h3>Fundamental Specification Caveats</h3>
+        <h3>Important Caveats</h3>
         <ul class="req-list">
-          <li>Claw tokens are short-lived (we suggest 10 minutes)</li>
+          <li>Claw tokens are short-lived (we suggest 10 minutes, never more than 60 minutes)</li>
           <li>Claws cannot do destructive actions</li>
           <li>Claws cannot do dangerous actions</li>
           <li>A claw token can only be obtained by exchanging a human-instigated login token (ie. a website cookie)</li>
           <li>We have a specification for prompts that should be adhered to so a human can scan it and see it is mundane</li>
         </ul>
+        <h3>Additional Features</h3>
         <ul class="req-list">
           <li>
-            Capability tokens are short-lived and must never exceed
-            <code>60 minutes</code>.
+            Claw tokens can be renewed †
           </li>
           <li>
             Capability tokens are bound to a single API base path via
@@ -73,6 +75,11 @@
             session.
           </li>
         </ul>
+        <blockquote>
+          † The claw is given a URL specification and a puzzle to create the URL based on their previous token.
+            The claw can then present this URL to their human.
+            Clicking it opens a page at the original site that allows the user to renew the token provided they are signed in as the same user who created the original token.
+        </blockquote>
         <div class="spec-grid">
           <article class="placeholder">
             <h3>Core Protocol</h3>
