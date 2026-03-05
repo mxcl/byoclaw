@@ -270,6 +270,15 @@
         margin-top: 1.5rem;
       }
 
+      .req-list {
+        margin: 1rem 0 0 1.25rem;
+        color: var(--muted);
+      }
+
+      .req-list li {
+        margin-bottom: 0.6rem;
+      }
+
       .placeholder {
         background: rgba(255,255,255,0.02);
         border: 1px dashed rgba(255,45,106,0.3);
@@ -481,9 +490,24 @@
       <section>
         <h2>Specification</h2>
         <p>
-          This site will host the full specification. For now, the structure is
-          outlined below with placeholder content.
+          Current confirmed requirements are now codified in the relay spec.
+          The items below are normative and not placeholders.
         </p>
+        <ul class="req-list">
+          <li>
+            Capability tokens are short-lived and must never exceed
+            <code>60 minutes</code>.
+          </li>
+          <li>
+            Capability tokens are bound to a single API base path via
+            <code>api_base</code> (for example <code>/api/claw</code>).
+          </li>
+          <li>
+            Claws may request renewal via a hosted URL derived from old-token
+            context, and renewal succeeds only for an active logged-in user
+            session.
+          </li>
+        </ul>
         <div class="spec-grid">
           <article class="placeholder">
             <h3>Core Protocol</h3>
