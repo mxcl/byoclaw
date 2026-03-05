@@ -270,6 +270,7 @@ Capability token (JWT/PASETO/macaroon) must include:
 
 - `iss`, `sub`, `aud` (audience must equal `device_id`)
 - `client_id`, `user_id`, `origin`
+- `api_base` (exact allowed API base path, eg `/api/claw`)
 - `scopes` (least privilege)
 - `exp`, `nbf`, `iat`, `jti`
 - optional caveats: rate limits, max tool risk level
@@ -287,6 +288,30 @@ Capability token (JWT/PASETO/macaroon) must include:
 ## 7.3 Enforcement
 
 Connector **must** validate token and enforce scope locally. Relay checks are additional, not sufficient.
+
+Connector **must** reject requests whose HTTP target/path is outside the token's
+`api_base` grant, even when the requested scope would otherwise permit action.
+
+## 7.4 Token lifetime requirements
+
+- Capability token lifetime **must** be short-lived.
+- `exp - iat` **must not exceed 60 minutes**.
+- Recommended default lifetime remains 15 minutes.
+- Connectors and relay should reject tokens with excessive issued-at skew.
+
+## 7.5 Token renewal via user session
+
+When a capability token is near expiry (or expired), the connector may return a
+renewal requirement response that includes a hosted renewal URL.
+
+- Renewal URL **must** be derived from a valid previous token context
+  (eg token `jti` + pairing context), not from arbitrary caller input.
+- Renewal URL **must** resolve to a BYOClaw hosted auth endpoint that requires
+  an active, valid user login session.
+- If the user is not logged in, renewal **must** fail and require user
+  authentication before issuing a new token.
+- A successful renewal issues a new short-lived token with the same or reduced
+  privileges unless the user explicitly re-consents to broader scope.
 
 ---
 
@@ -444,6 +469,9 @@ Use stable error codes, eg:
 - [ ] End-to-end signatures verified at connector
 - [ ] Nonce/counter replay prevention
 - [ ] Short-lived capability tokens
+- [ ] Capability token max lifetime <= 60 minutes
+- [ ] Capability token bound to exact `api_base`
+- [ ] Renewal URL requires active authenticated user session
 - [ ] Per-origin consent + revocation
 - [ ] Sensitive scopes default-deny
 - [ ] Local audit log with tamper evidence
@@ -503,6 +531,7 @@ This keeps user trust high while monetizing commercial integrations.
 ## Appendix B: Recommended MVP defaults
 
 - Token TTL: 15 minutes
+- Token TTL hard maximum: 60 minutes
 - Pairing token TTL: 5 minutes
 - Handoff code TTL: 90 seconds
 - Handoff code rotation interval: 30 seconds
