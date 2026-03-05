@@ -30,7 +30,7 @@
           Bring your <em>own</em> OpenClaw into third party websites.
         </p>
         <p class="subtitle">
-          A specification for builders who want to add byo·claw buttons to their products.
+          A specification for builders who want to add byo·claw integration to their products.
         </p>
       </header>
 
@@ -40,11 +40,22 @@
       </figure>
 
       <section>
-        <h2>Specification</h2>
+        <h2>Specification Overview</h2>
         <p>
-          Current confirmed requirements are now codified in the relay spec.
-          The items below are normative and not placeholders.
+          byo·claw is fundamentally 2 pieces:
         </p>
+        <ul class="req-list">
+          <li>A restricted, separate api for OpenClaws</li>
+          <li>A prompt to a human’s Claw</li>
+        </ul>
+        <h3>Fundamental Specification Caveats</h3>
+        <ul class="req-list">
+          <li>Claw tokens are short-lived (we suggest 10 minutes)</li>
+          <li>Claws cannot do destructive actions</li>
+          <li>Claws cannot do dangerous actions</li>
+          <li>A claw token can only be obtained by exchanging a human-instigated login token (ie. a website cookie)</li>
+          <li>We have a specification for prompts that should be adhered to so a human can scan it and see it is mundane</li>
+        </ul>
         <ul class="req-list">
           <li>
             Capability tokens are short-lived and must never exceed
