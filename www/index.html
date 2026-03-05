@@ -59,62 +59,37 @@
       </section>
       <section>
         <h2>Specification Overview</h2>
-        <p>
-          byo·claw is fundamentally 2 pieces:
-        </p>
-        <ul class="req-list">
-          <li>A restricted, separate api for OpenClaws</li>
-          <li>A prompt the human gives their Claw</li>
-        </ul>
-        <h3>Important Caveats</h3>
-        <ul class="req-list">
-          <li>Claw tokens are short-lived (we suggest 10 minutes, never more than 60 minutes)</li>
-          <li>Claws cannot do destructive or dangerous actions</li>
-          <li>Claws should not have access to sensitive data</li>
-          <li>The API doesn’t have to be a separate subdomain, an exclusive api base path is sufficient</li>
-          <li>A claw token can only be obtained by exchanging a human-instigated login token (ie. a website cookie)</li>
-          <li>We have a specification for prompts that should be adhered to so a human can scan it and see it is mundane</li>
-        </ul>
-        <h3>Additional Features</h3>
-        <ul class="req-list">
-          <li>
-            Claw tokens can be renewed †
-          </li>
-        </ul>
-        <blockquote>
-          † The claw is given a URL specification and a puzzle to create the URL based on their previous token.
-            The claw can then present this URL to their human.
-            Clicking it opens a page at the original site that allows the user to renew the token provided they are signed in as the same user who created the original token.
-            Tokens can be renewed for 120 minutes from expiry.
-        </blockquote>
         <div class="spec-grid">
-          <article class="placeholder">
-            <h3>Core Protocol</h3>
-            <p>
-              Define connection lifecycle, discovery behavior, and
-              minimum compatibility requirements.
-            </p>
+          <article class="placeholder placeholder-core">
+            <h3>Fundamentals</h3>
+            <p>byo·claw is fundamentally 2 pieces:</p>
+            <ul class="req-list">
+              <li>A restricted, separate api for OpenClaws</li>
+              <li>A prompt the human gives their Claw</li>
+            </ul>
           </article>
           <article class="placeholder">
-            <h3>Identity &amp; Trust</h3>
-            <p>
-              Define identity assertions, trust model, and how
-              claws prove capability without over-sharing.
-            </p>
+            <h3>Important Caveats</h3>
+            <ul class="req-list">
+              <li>Claw tokens are short-lived (we suggest 10 minutes, never more than 60 minutes)</li>
+              <li>Claws cannot do destructive or dangerous actions</li>
+              <li>Claws should not have access to sensitive data</li>
+              <li>The API doesn’t have to be a separate subdomain, an exclusive api base path is sufficient</li>
+              <li>A claw token can only be obtained by exchanging a human-instigated login token (ie. a website cookie)</li>
+              <li>We have a specification for prompts that should be adhered to so a human can scan it and see it is mundane</li>
+            </ul>
           </article>
-          <article class="placeholder">
-            <h3>Permissions</h3>
-            <p>
-              Define user-consented permissions, scope limits, and
-              revocation flows.
-            </p>
-          </article>
-          <article class="placeholder">
-            <h3>Error Handling</h3>
-            <p>
-              List normative error codes and required fallback
-              behavior for hosts and claws.
-            </p>
+          <article class="placeholder placeholder-feature">
+            <h3>Additional Features</h3>
+            <ul class="req-list">
+              <li>Claw tokens can be renewed †</li>
+            </ul>
+            <blockquote>
+              † The claw is given a URL specification and a puzzle to create the URL based on their previous token.
+              The claw can then present this URL to their human.
+              Clicking it opens a page at the original site that allows the user to renew the token provided they are signed in as the same user who created the original token.
+              Tokens can be renewed for 120 minutes from expiry.
+            </blockquote>
           </article>
         </div>
       </section>
