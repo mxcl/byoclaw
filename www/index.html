@@ -37,7 +37,19 @@
           Bring your <em>own</em> OpenClaw into third party websites.
         </p>
         <p class="subtitle">
-          A specification for builders who want to add byo·claw integration to their products.
+          Bring Your Own Claw is a specification that lets a human&apos;s
+          OpenClaw request temporary access to a restricted API on your website.
+        </p>
+        <p class="subtitle">
+          For example, Supermassive Book Hole is a site where users curate
+          collections of books and other media they&apos;ve consumed. With
+          byo·claw, a user could compare their collection with friends and
+          build a reading journey, ask for one recommendation from a friend or
+          influencer based on what the Claw knows about them, or remove every
+          title on their shelves that was written before 1984. byo·claw brings
+          a user&apos;s personal AI assistant to the web, unlocking functionality
+          that would be too complex or too niche to justify building full UI/UX
+          for.
         </p>
       </header>
 
@@ -52,13 +64,14 @@
         </p>
         <ul class="req-list">
           <li>A restricted, separate api for OpenClaws</li>
-          <li>A prompt to a human’s Claw</li>
+          <li>A prompt the human gives their Claw</li>
         </ul>
         <h3>Important Caveats</h3>
         <ul class="req-list">
           <li>Claw tokens are short-lived (we suggest 10 minutes, never more than 60 minutes)</li>
           <li>Claws cannot do destructive actions</li>
           <li>Claws cannot do dangerous actions</li>
+          <li>The API doesn’t have to be a separate subdomain, an exclusive api base path is sufficient</li>
           <li>A claw token can only be obtained by exchanging a human-instigated login token (ie. a website cookie)</li>
           <li>We have a specification for prompts that should be adhered to so a human can scan it and see it is mundane</li>
         </ul>
@@ -67,20 +80,12 @@
           <li>
             Claw tokens can be renewed †
           </li>
-          <li>
-            Capability tokens are bound to a single API base path via
-            <code>api_base</code> (for example <code>/api/claw</code>).
-          </li>
-          <li>
-            Claws may request renewal via a hosted URL derived from old-token
-            context, and renewal succeeds only for an active logged-in user
-            session.
-          </li>
         </ul>
         <blockquote>
           † The claw is given a URL specification and a puzzle to create the URL based on their previous token.
             The claw can then present this URL to their human.
             Clicking it opens a page at the original site that allows the user to renew the token provided they are signed in as the same user who created the original token.
+            Tokens can be renewed for 120 minutes from expiry.
         </blockquote>
         <div class="spec-grid">
           <article class="placeholder">
@@ -141,9 +146,8 @@
       <section>
         <h2>Coming Soon</h2>
         <ul class="req-list">
-          <li><code>scoped permission</code></li>
-          <li>Host-side permission management UI</li>
-          <li>Reference adapters for major web frameworks</li>
+          <li>Scoped permissions</li>
+          <li>“Validated by byo·claw” badges</li>
         </ul>
       </section>
 
@@ -151,8 +155,7 @@
         <h2>Assets</h2>
         <p>
           You can either download these buttons or link to them directly.
-          Linking is sorta recommended since we reserve the right to update
-          these with nicer ones.
+          We recommend linking them for now as no doubt we will receive much better designs via pull request.
         </p>
         <div class="asset-grid">
           <article class="asset-card">
