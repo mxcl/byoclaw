@@ -313,6 +313,23 @@ renewal requirement response that includes a hosted renewal URL.
 - A successful renewal issues a new short-lived token with the same or reduced
   privileges unless the user explicitly re-consents to broader scope.
 
+## 7.6 Long-term polling tokens
+
+Some integrations need a longer-running read-only token so the claw can poll a
+third-party feed on a schedule (eg a cron job that checks a social media feed,
+filters interesting activity, and forwards highlights to the user).
+
+Long-term polling tokens have stricter rules than normal capability tokens:
+
+- They **must be GET-only**. Any non-GET request **must** be denied.
+- They **must be read-only** in scope (no tool invocation or write scopes).
+- `exp - iat` **must not exceed 7 days**.
+- Renewal **must** require token exchange using a memorized nonce that was
+  issued and bound at original token creation time.
+- Exchange with missing/invalid nonce **must** fail.
+- Each successful exchange **must** issue a fresh nonce for the next renewal
+  chain step.
+
 ---
 
 ## 8) Execution Semantics
@@ -470,6 +487,9 @@ Use stable error codes, eg:
 - [ ] Nonce/counter replay prevention
 - [ ] Short-lived capability tokens
 - [ ] Capability token max lifetime <= 60 minutes
+- [ ] Long-term polling token lifetime <= 7 days
+- [ ] Long-term polling tokens enforce GET-only semantics
+- [ ] Long-term polling token exchange requires bound memorized nonce
 - [ ] Capability token bound to exact `api_base`
 - [ ] Renewal URL requires active authenticated user session
 - [ ] Per-origin consent + revocation
@@ -532,6 +552,7 @@ This keeps user trust high while monetizing commercial integrations.
 
 - Token TTL: 15 minutes
 - Token TTL hard maximum: 60 minutes
+- Long-term polling token TTL hard maximum: 7 days
 - Pairing token TTL: 5 minutes
 - Handoff code TTL: 90 seconds
 - Handoff code rotation interval: 30 seconds
