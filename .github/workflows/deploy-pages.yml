@@ -25,6 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Copy assets and fix URLs
+        run: |
+          cp assets/*.webp assets/*.jpeg www/
+          sed -i 's|\.\./assets/|./|g' www/index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
