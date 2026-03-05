@@ -313,6 +313,40 @@
         margin: 0;
       }
 
+      /* Asset cards */
+      .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .asset-card {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px;
+        padding: 1rem;
+      }
+
+      .asset-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.08);
+        margin-bottom: 0.8rem;
+      }
+
+      .asset-card h3 {
+        margin-bottom: 0.35rem;
+      }
+
+      .asset-meta {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
       /* Code block */
       code {
         font-family: 'JetBrains Mono', monospace;
@@ -562,6 +596,35 @@
           AI contributions are accepted, but poor quality submissions may be
           banned.
         </p>
+      </section>
+
+      <section>
+        <h2>Assets</h2>
+        <p>
+          You can either download these buttons or link to them directly.
+          Linking is sorta recommended since we reserve the right to update
+          these with nicer ones.
+        </p>
+        <div class="asset-grid">
+          <article class="asset-card">
+            <img src="../assets/button.webp" alt="byo·claw button (WebP)" />
+            <h3>button.webp</h3>
+            <p class="asset-meta">14.4 kB</p>
+            <p>
+              <a href="../assets/button.webp">Link to file</a> ·
+              <a href="../assets/button.webp" download>Download</a>
+            </p>
+          </article>
+          <article class="asset-card">
+            <img src="../assets/button.jpeg" alt="byo·claw button (JPEG)" />
+            <h3>button.jpeg</h3>
+            <p class="asset-meta">66.4 kB</p>
+            <p>
+              <a href="../assets/button.jpeg">Link to file</a> ·
+              <a href="../assets/button.jpeg" download>Download</a>
+            </p>
+          </article>
+        </div>
       </section>
 
       <section>
