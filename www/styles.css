@@ -278,6 +278,23 @@ p:last-child {
   margin-top: 1.5rem;
 }
 
+.uses-heading {
+  margin-top: 1.5rem;
+}
+
+.uses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 760px) {
+  .uses-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .req-list {
   margin: 1rem 0 0 1.25rem;
   color: var(--muted);
