@@ -106,16 +106,10 @@ header {
 
 .title-row {
   display: inline-flex;
-  align-items: flex-end;
+  align-items: baseline;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 0.5rem;
-}
-
-.title-lockup {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.8rem;
 }
 
 .title-plushie {
@@ -151,10 +145,10 @@ header {
   color: var(--glow-1);
   opacity: 0.3;
   white-space: pre;
-  position: static;
-  margin: 0;
-  transform: rotate(15deg) translateY(-0.1rem);
-  transform-origin: bottom center;
+  position: absolute;
+  right: -2rem;
+  top: 2rem;
+  transform: rotate(15deg);
   display: none;
 }
 
