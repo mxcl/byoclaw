@@ -149,13 +149,16 @@
           </article>
           <article class="placeholder placeholder-feature">
             <h3>Tightly Scoped Longterm Tokens</h3>
+            <ul class="req-list">
+              <li>NOW: your phone buzzes for every new comment on a post.</li>
+              <li>WITH BYOClaw: your phone only buzzes if your Claw decides the comment *interests you*.</li>
+            </ul>
             <p>
-              Think: instead of getting notifications for every new comment on a post,
-              a Claw could get a tightly scoped token to check for new comments on that ONLY that post.
-              Their claw could then set up a cron job to poll and <b>only surface new
-                and interesting comments to their human, <i>instead of every single one</i>.
-              </b>
+              Your Claw gets a tightly scoped token for new comments on ONLY that post.
+              It sets up a new cron job to poll.
+              If the comment interests you, it buzzes your phone otherwise it goes to <code>/dev/null</code>.
             </p>
+
           </article>
           <article class="placeholder spec-full-box">
             <h3>Read the Full Specification</h3>
