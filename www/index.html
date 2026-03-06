@@ -47,7 +47,7 @@
         <h2>Usecases</h2>
         <div class="uses-grid">
           <article class="placeholder">
-            <h3>Websites Enhanced by OpenClaw</h3>
+            <h3>Claw-Enhanced Websites</h3>
             <p>
               BYOClaw lets websites expose richer, niche, and highly personalized
               functionality without building every flow in traditional UI.
@@ -154,32 +154,41 @@
 
       <section>
         <h2>Prompt Guidelines</h2>
-        <p>
+        <p style="max-width: 33em">
           Prompts should be easily scannable by the user to prove there is no prompt injection attempts.
         </p>
         <p>
           The best way to do this is to be as concise as possible.
-          Endpoints should thus be named so the name, path and website description <b>alone</b> perfectly describe the purpose to the claw.
-          Additional docs should be minimal to prove no prompt injection.
         </p>
-        <p>
+        <ul class="req-list" style="max-width: 33em">
+          <li>Endpoints should thus be named so the name, path and website description <b>alone</b> perfectly describe the purpose to the claw.
+          <li>Additional docs should be minimal to prove no prompt injection.
+          <li>JSON responses should explain themselves to the Claw without requiring documentation.
+          <li>Add HTTP Headers as required to assist the Claw also.
+        </ul>
+        <p style="max-width: 33em">
           Enclose the text in triple backticks so it renders well when the human pastes it.
         </p>
         <pre><code>
           ```md
-          # FooBar Temporary Gateway
+          # Supermassive Book Hole — Temporary Gateway
 
-          FooBar is a service that foos the bar.
+          SMBH is a website where humans curate virtual shelves of books.
 
-          # Creds
+          ## Creds
+          - Base URL: https://api.example.com/api/claw
+          - Authorization: Bearer smbhclaw_TeStTeStTeStTeStTeStTeStTeStTeSt
+          - Expires At (UTC): 2026-03-06T01:46:10.778Z
+          - Your human's username: @mxcl
 
-          - API base: https://example.com/api/claw
-          - Authorization Token: dsklfjsdklfjslkdjfkl
+          ## APIs
+          - GET /:username
+          - GET /:username/following
+          - GET /:username/followers
+          - POST /:shelf-id/:media-type Fields: {title, author, shelf}
 
-          # APIs
-
-          - /me
-          - /me/friends
+          ### `:media-type`
+          ["book", "movie", "show", "game", "album", "single"]
           ```
         </code></pre>
         <div class="footnote">EXAMPLE</div>
