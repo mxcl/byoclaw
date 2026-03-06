@@ -135,10 +135,10 @@
             </ol>
           </article>
           <article class="build-summary-box">
+            <h3>What You Build</h3>
             <p>
-              <strong>What you build:</strong> Websites implement an
-              <code>/api/claw/*</code> endpoint and a token issuance button.
-              Claw agents consume gateway text.
+              Websites implement an <code>/api/claw/*</code> endpoint and a token+prompt issuance button.
+              OpenClaws consume gateway text.
             </p>
           </article>
           <article class="placeholder">
@@ -148,7 +148,7 @@
               human-instigated login token (ie. a website cookie).
             </p>
             <p style='font-size: smaller; font-style: italic; opacity: 0.617'>
-              This happens in the human’s browser: the Claw never gets the cookie, obv.
+              This happens between the human’s browser and your API: the Claw never sees the human’s cookie.
             </p>
           </article>
           <article class="placeholder">
@@ -191,7 +191,7 @@
           <article class="placeholder spec-full-box">
             <h3>Read the Full Specification</h3>
             <p>
-              The overview below highlights the key principles. For complete
+              The overview above highlights the key principles. For complete
               details, examples, and versioned updates, use the canonical
               <code>SPEC.md</code> document.
             </p>
@@ -261,8 +261,7 @@ of books.
           <section>
             <h2>Specification Development</h2>
             <p>
-              The specification is a living, open source document. Participation
-              from both humans and machines is encouraged.
+              The specification is a living, open source document.
             </p>
             <p>
               Please have your Claw check the issue tracker for existing issues
