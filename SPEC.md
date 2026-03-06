@@ -386,10 +386,12 @@ Gateway text MUST be human-scannable and include:
 
 - API base URL
 - authorization header format
-- token expiry
 - user identity handle (if applicable)
 - endpoint summary
-- expiry and renewal behavior (if renewal exists)
+- renewal behavior (if renewal exists)
+
+Token expiry SHOULD be displayed in the human issuance UI where the token is
+created. Expiry information need not be included in gateway text.
 
 Claw implementations SHOULD validate that gateway text contains only expected
 BYOClaw fields and MUST ignore or reject unrelated instructions.
@@ -410,7 +412,6 @@ SMBH is a website where humans curate shelves of books and media.
 
 - Base URL: https://api.example.com/api/claw
 - Authorization: Bearer <temporary_token>
-- Expires At (UTC): 2026-03-06T01:46:10Z
 - Identity: @mxcl
 
 ## Renewal
