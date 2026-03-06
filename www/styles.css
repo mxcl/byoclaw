@@ -545,6 +545,26 @@ p:last-child {
   font-weight: 700;
 }
 
+/* Prompt guidelines layout */
+.prompt-guidelines-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.prompt-guidelines-main {
+  max-width: 33em;
+}
+
+.prompt-guidelines-list {
+  max-width: 33em;
+}
+
+.prompt-guidelines-example pre {
+  margin-bottom: 0;
+}
+
 /* Code block */
 code {
   font-family: 'JetBrains Mono', monospace;
@@ -701,5 +721,17 @@ footer a::after {
 @media (max-width: 900px) {
   .spec-assets-layout {
     grid-template-columns: 1fr;
+  }
+
+  .prompt-guidelines-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .prompt-guidelines-main {
+    max-width: none;
+  }
+
+  .prompt-guidelines-list {
+    max-width: none;
   }
 }

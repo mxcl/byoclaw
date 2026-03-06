@@ -152,24 +152,28 @@
         </div>
       </section>
 
-      <section>
+      <section class="prompt-guidelines">
         <h2>Prompt Guidelines</h2>
-        <p style="max-width: 33em">
-          Prompts should be easily scannable by the user to prove there is no prompt injection attempts.
-        </p>
-        <p>
-          The best way to do this is to be as concise as possible.
-        </p>
-        <ul class="req-list" style="max-width: 33em">
-          <li>Endpoints should thus be named so the name, path and website description <b>alone</b> perfectly describe the purpose to the claw.
-          <li>Additional docs should be minimal to prove no prompt injection.
-          <li>JSON responses should explain themselves to the Claw without requiring documentation.
-          <li>Add HTTP Headers as required to assist the Claw also.
-        </ul>
-        <p style="max-width: 33em">
-          Enclose the text in triple backticks so it renders well when the human pastes it.
-        </p>
-        <pre><code>
+        <div class="prompt-guidelines-layout">
+          <div class="prompt-guidelines-main">
+            <p>
+              Prompts should be easily scannable by the user to prove there is no prompt injection attempts.
+            </p>
+            <p>
+              The best way to do this is to be as concise as possible.
+            </p>
+            <ul class="req-list prompt-guidelines-list">
+              <li>Endpoints should thus be named so the name, path and website description <b>alone</b> perfectly describe the purpose to the claw.</li>
+              <li>Additional docs should be minimal to prove no prompt injection.</li>
+              <li>JSON responses should explain themselves to the Claw without requiring documentation.</li>
+              <li>Add HTTP Headers as required to assist the Claw also.</li>
+            </ul>
+            <p>
+              Enclose the text in triple backticks so it renders well when the human pastes it.
+            </p>
+          </div>
+          <div class="prompt-guidelines-example">
+            <pre><code>
           ```md
           # Supermassive Book Hole — Temporary Gateway
 
@@ -191,7 +195,9 @@
           ["book", "movie", "show", "game", "album", "single"]
           ```
         </code></pre>
-        <div class="footnote">EXAMPLE</div>
+            <div class="footnote">EXAMPLE</div>
+          </div>
+        </div>
       </section>
 
       <div class="spec-assets-layout">
