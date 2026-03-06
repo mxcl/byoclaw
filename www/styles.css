@@ -314,10 +314,12 @@ p:last-child {
   --placeholder-title-color: #ffe7bb;
   --placeholder-body-color: #c2ab82;
   grid-column: 1 / -1;
+  border-color: rgba(255,179,71,0.45);
   background: rgba(255,179,71,0.07);
 }
 
 .placeholder.uses-example-box:hover {
+  border-color: rgba(255,179,71,0.75);
   background: rgba(255,179,71,0.12);
 }
 
