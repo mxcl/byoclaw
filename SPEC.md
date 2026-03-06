@@ -231,6 +231,9 @@ The Claw API SHOULD:
 - avoid sensitive personal data
 - keep mutations scoped to the token owner
 
+Claw APIs SHOULD enforce rate limits per token.
+Suggested baseline: 60 requests per minute.
+
 ---
 
 # Safety Guidelines
