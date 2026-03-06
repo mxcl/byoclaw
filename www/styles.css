@@ -310,7 +310,7 @@ p:last-child {
   margin-top: 1rem;
 }
 
-.uses-example-box {
+.placeholder.uses-example-box {
   --placeholder-title-color: #ffe7bb;
   --placeholder-body-color: #c2ab82;
   grid-column: 1 / -1;
@@ -320,7 +320,7 @@ p:last-child {
   background: rgba(255,179,71,0.07);
 }
 
-.uses-example-box:hover {
+.placeholder.uses-example-box:hover {
   border-color: rgba(255,179,71,0.75);
   background: rgba(255,179,71,0.12);
 }
