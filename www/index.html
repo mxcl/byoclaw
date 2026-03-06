@@ -73,7 +73,7 @@
             </ul>
           </article>
           <article class="placeholder">
-            <h3>The Future is App<i style="opacity: 0.617">less</i></h3>
+            <h3 id="usecase-appless-heading">The Future is App<i style="opacity: 0.617">less</i></h3>
             <p>
               Claw-only Services are single-page websites with a BYOClaw button.
               They expose functionality only through Claw APIs, and your Claw
@@ -373,6 +373,44 @@ of books.
         <p>◇ <a href="https://byoclaw.dev">byoclaw.dev</a> ◇</p>
       </footer>
     </main>
+    <script>
+      function fitApplessHeadingToWidth() {
+        const heading = document.getElementById('usecase-appless-heading');
+        if (!heading) return;
+
+        const containerWidth = heading.clientWidth;
+        if (!containerWidth) return;
+
+        heading.style.whiteSpace = 'nowrap';
+
+        let low = 12;
+        let high = 120;
+        let best = 12;
+
+        while (low <= high) {
+          const mid = (low + high) / 2;
+          heading.style.fontSize = `${mid}px`;
+
+          if (heading.scrollWidth <= containerWidth) {
+            best = mid;
+            low = mid + 0.25;
+          } else {
+            high = mid - 0.25;
+          }
+        }
+
+        heading.style.fontSize = `${best.toFixed(2)}px`;
+      }
+
+      window.addEventListener('load', () => {
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(fitApplessHeadingToWidth);
+          return;
+        }
+
+        fitApplessHeadingToWidth();
+      });
+    </script>
   </body>
 </html>
 
