@@ -360,7 +360,7 @@ p:last-child {
 
 .placeholder-core {
   --placeholder-title-color: #d6f8ff;
-  --placeholder-body-color: #9feeff;
+  --placeholder-body-color: #8fb2b9;
   border-color: rgba(0,240,255,0.35);
   background: rgba(0,240,255,0.05);
 }
@@ -372,7 +372,7 @@ p:last-child {
 
 .placeholder-feature {
   --placeholder-title-color: #ffe7bb;
-  --placeholder-body-color: #ffd596;
+  --placeholder-body-color: #c2ab82;
   border-color: rgba(255,179,71,0.45);
   background: rgba(255,179,71,0.07);
 }
