@@ -134,6 +134,13 @@
               <li>A prompt the human gives their Claw</li>
             </ol>
           </article>
+          <article class="build-summary-box">
+            <p>
+              <strong>What you build:</strong> Websites implement an
+              <code>/api/claw/*</code> endpoint and a token issuance button.
+              Claw agents consume gateway text.
+            </p>
+          </article>
           <article class="placeholder">
             <h3>Human-Initiated Token Exchange</h3>
             <p>
@@ -181,29 +188,6 @@
               Renewal works via a URL the human must click from an authenticated browser session.
             </p>
           </article>
-          <article class="placeholder placeholder-feature">
-            <h3>Tightly Scoped Longterm Tokens</h3>
-            <ul class="req-list">
-              <li>NOW: your phone buzzes for every new comment on a post.</li>
-              <li>WITH BYOClaw: your phone only buzzes if your Claw decides the comment *interests you*.</li>
-            </ul>
-            <p>
-              Your Claw gets a tightly scoped token for new comments on ONLY that post.
-              It sets up a new cron job to poll.
-              If the comment interests you, it buzzes your phone otherwise it goes to <code>/dev/null</code>.
-            </p>
-            <p>
-              <b>THIS IS FUTURE WORK</b>
-            </p>
-
-          </article>
-          <article class="build-summary-box">
-            <p>
-              <strong>What you build:</strong> Websites implement an
-              <code>/api/claw/*</code> endpoint and a token issuance button.
-              Claw agents consume gateway text.
-            </p>
-          </article>
           <article class="placeholder spec-full-box">
             <h3>Read the Full Specification</h3>
             <p>
@@ -219,6 +203,43 @@
             >
               Open SPEC.md
             </a>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Future Work</h2>
+        <div class="spec-grid">
+          <article class="placeholder placeholder-feature">
+            <h3>Future Work</h3>
+            <ul class="req-list">
+              <li>NOW: your phone buzzes for every new comment on a post.</li>
+              <li>
+                WITH BYOClaw: your phone only buzzes if your Claw decides the
+                comment interests you.
+              </li>
+            </ul>
+            <p>
+              Your Claw gets a tightly scoped token for new comments on only
+              that post. It sets up a new cron job to poll. If the comment
+              interests you, it buzzes your phone, otherwise it goes to
+              <code>/dev/null</code>.
+            </p>
+          </article>
+          <article class="placeholder placeholder-feature">
+            <h3>Scoped Permissions</h3>
+            <p>
+              Define granular, revocable capabilities so a token can be limited
+              to a narrow action set like comment triage or one shelf.
+            </p>
+          </article>
+          <article class="placeholder placeholder-feature">
+            <h3>Richer Discovery Metadata</h3>
+            <p>
+              Publish machine-readable metadata that helps Claws discover the
+              API surface, policy limits, and renewal flows with minimal prompt
+              overhead.
+            </p>
           </article>
         </div>
       </section>

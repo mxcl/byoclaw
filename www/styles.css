@@ -160,14 +160,25 @@ header .subtitle {
 }
 
 .build-summary-box {
-  grid-column: 1 / -1;
+  border: 2px solid rgba(255,45,106,0.92);
   padding: 0.95rem 1.1rem;
-  border: 1px solid rgba(255,45,106,0.42);
   border-radius: 12px;
-  background: rgba(255,45,106,0.08);
-  color: #ffe7f0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,45,106,0.2),
+    rgba(177,78,255,0.12)
+  );
+  box-shadow: 0 0 28px rgba(255,45,106,0.22);
+  color: #fff0f6;
   font-size: 0.98rem;
   line-height: 1.6;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.build-summary-box:hover {
+  border-color: rgba(255,45,106,1);
+  box-shadow: 0 0 34px rgba(255,45,106,0.32);
+  transform: translateY(-2px);
 }
 
 .build-summary-box p {
