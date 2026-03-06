@@ -490,10 +490,11 @@ p:last-child {
 }
 
 .github-cta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  width: fit-content;
+  margin: 1rem auto 0;
   padding: 0.9rem 1.5rem;
   border: 2px solid rgba(0,240,255,0.75);
   border-radius: 12px;
