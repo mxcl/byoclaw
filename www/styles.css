@@ -68,13 +68,13 @@ body {
   z-index: 1;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 6rem;
+  padding: 0 1.5rem 6rem;
 }
 
 /* Hero section */
 header {
   text-align: center;
-  padding: 4rem 0 5rem;
+  padding: 0 0 5rem;
   position: relative;
 }
 
