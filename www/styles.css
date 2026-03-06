@@ -351,6 +351,10 @@ p:last-child {
   line-height: 1.65;
 }
 
+.usecase-appless p {
+  text-align: justify;
+}
+
 .placeholder.uses-example-box {
   --placeholder-title-color: #ffe7bb;
   --placeholder-body-color: #c2ab82;
