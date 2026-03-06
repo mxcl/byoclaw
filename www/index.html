@@ -54,6 +54,27 @@
       </header>
 
       <section>
+        <h2>Usecases</h2>
+        <div class="uses-grid">
+          <article class="placeholder">
+            <h3>Websites Enhanced by OpenClaw</h3>
+            <p>
+              BYOClaw lets websites expose richer, niche, and highly personalized
+              functionality without building every flow in traditional UI.
+            </p>
+          </article>
+          <article class="placeholder">
+            <h3>The Future is Appless</h3>
+            <p>
+              Claw-only Services are websites with just a front page with a BYOClaw button.
+              They expose functionality only through Claw APIs, and your Claw
+              builds your own local interface customized entirely for you.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section>
         <h2>Specification Overview</h2>
         <div class="spec-grid">
           <article class="placeholder placeholder-core">
@@ -112,32 +133,49 @@
           </article>
           <article class="placeholder placeholder-feature">
             <h3>Coming Soon</h3>
-            <p>Scoped permissions</p>
+            <ul class="req-list">
+              <li>Scoped permissions</li>
+              <li>&ldquo;Validated by BYOClaw&rdquo; badges</li>
+            </ul>
           </article>
           <article class="placeholder placeholder-feature">
-            <h3>Coming Soon</h3>
-            <p>&ldquo;Validated by BYOClaw&rdquo; badges</p>
-          </article>
-        </div>
-        <h3 class="uses-heading">Uses</h3>
-        <div class="uses-grid">
-          <article class="placeholder">
-            <h3>Enhance Website Functionality</h3>
+            <h3>Tightly Scoped Longterm Tokens</h3>
             <p>
-              BYOClaw lets websites expose richer, niche, and highly personalized
-              functionality without building every flow in traditional UI.
-            </p>
-          </article>
-          <article class="placeholder">
-            <h3>Claw-Only Services</h3>
-            <p>
-              Some services can be just a front page with a BYOClaw button.
-              They expose functionality only through Claw APIs, and your Claw
-              builds your own local interface customized for you on top of that
-              service.
+              Think: instead of getting notifications for every new comment on a post,
+              a Claw could get a tightly scoped token to check for new comments on that ONLY that post.
+              Their claw could then set up a cron job to poll and <b>only surface new
+                and interesting comments to their human, <i>instead of every single one</i>.
+              </b>
             </p>
           </article>
         </div>
+      </section>
+
+      <section>
+        <h2>Prompt Guidelines</h2>
+
+        <p>Prompts should be easily scannable by the user to prove there is no prompt injection attempts.</p>
+        <p>
+          The best way to do this is to be as concise as possible.
+          Endpoints should thus be named so the name, path and website description <b>alone</b> perfectly describe the purpose to the claw.</p>
+          Additional docs should be minimal to prove no prompt injection.
+        </p>
+
+        <pre><code>
+          # FooBar Temporary Gateway
+
+          FooBar is a service that foos the bar.
+
+          # Creds
+
+          - API base: https://example.com/api/claw
+          - Authorization Token: dsklfjsdklfjslkdjfkl
+
+          # APIs
+
+          - /me
+          - /me/friends
+        </code></pre>
       </section>
 
       <section>
@@ -181,16 +219,6 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section>
-        <h2>Prompt Your Claw</h2>
-        <pre><code>1. Read the specification at https://byoclaw.dev
-2. Come up with suggestions
-3. Interview me about your suggestions and my own ideas
-4. Search GitHub for existing issues before opening a new one
-5. If you still have a good suggestion, open a ticket at
-   http://github.com/mxcl/byoclaw/issues/new</code></pre>
       </section>
 
       <section>
