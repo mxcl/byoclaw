@@ -403,6 +403,68 @@ p:last-child {
   background: rgba(255,179,71,0.12);
 }
 
+.spec-full-box {
+  --placeholder-title-color: #ffffff;
+  --placeholder-body-color: #d6eef9;
+  grid-column: 1 / -1;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0,240,255,0.85);
+  background: linear-gradient(
+    135deg,
+    rgba(0,240,255,0.12),
+    rgba(255,45,106,0.14)
+  );
+  box-shadow: 0 0 32px rgba(0,240,255,0.18);
+}
+
+.spec-full-box:hover {
+  border-color: rgba(255,45,106,0.95);
+  background: linear-gradient(
+    135deg,
+    rgba(0,240,255,0.18),
+    rgba(255,45,106,0.2)
+  );
+  box-shadow: 0 0 36px rgba(255,45,106,0.26);
+}
+
+.spec-full-box::after {
+  content: 'SPEC';
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+.spec-full-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.95rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: 8px;
+  background: rgba(6,18,26,0.45);
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.spec-full-link::after {
+  display: none;
+}
+
+.spec-full-link:hover {
+  color: #ffffff;
+  border-color: rgba(0,240,255,0.95);
+  background: rgba(0,240,255,0.15);
+  transform: translateY(-1px);
+}
+
 /* Spec + assets layout */
 .spec-assets-layout {
   display: grid;
