@@ -374,6 +374,27 @@ p:last-child {
   background: rgba(255,179,71,0.12);
 }
 
+/* Spec + assets layout */
+.spec-assets-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.spec-assets-left {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.spec-assets-layout section {
+  margin-bottom: 0;
+}
+
+.spec-assets-right {
+  height: 100%;
+}
+
 /* Asset cards */
 .asset-grid {
   display: grid;
@@ -588,6 +609,12 @@ footer a::after {
   }
 
   .asset-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .spec-assets-layout {
     grid-template-columns: 1fr;
   }
 }
