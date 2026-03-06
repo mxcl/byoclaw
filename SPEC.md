@@ -1,6 +1,6 @@
 # BYOClaw Specification
 
-Version 0.2.0
+Version 0.1.0
 
 Bring Your Own Claw (BYOClaw) is a minimal specification that allows a user's
 Claw agent to temporarily access restricted website APIs using human-initiated
@@ -262,7 +262,7 @@ Gateway text MUST be human-scannable and include:
 - API base URL
 - authorization header format
 - token expiry
-- user identity handle
+- user identity handle (if applicable)
 - endpoint summary
 - expiry/renewal behavior (if renewal exists)
 
@@ -311,9 +311,9 @@ SMBH is a website where humans curate shelves of books and media.
 
 # Example Flows
 
-## Initial issuance
+## Initial Issuance
 
-1. Human clicks Bring Your Claw.
+1. Human clicks BYOClaw button.
 2. Website returns token and gateway text.
 3. Human pastes gateway text to Claw.
 4. Claw calls `/api/claw/*` with bearer token.
