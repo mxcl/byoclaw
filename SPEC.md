@@ -206,11 +206,22 @@ These rules prevent replay of leaked proof material during the grace window.
 
 ## Expiry behavior
 
-When a token is expired but still in renewal grace, APIs SHOULD return:
+When renewal is implemented and a token is expired but still in renewal grace,
+the API MUST return a self-describing renewal response:
 
 - HTTP 401
 - `error: "CLAW_GATEWAY_TOKEN_EXPIRED"`
-- renewal details sufficient for proof-based renewal
+- `renewal` object with enough information for proof-based renewal without any
+  prior renewal knowledge in gateway text
+
+The `renewal` object MUST include at least:
+
+- `challengeToken`
+- `challengeExpiresAt`
+- `proofAlgorithm`
+- `proofFormula` as a literal expression string
+- `renewalUrlTemplate` or equivalent human-confirmation endpoint template
+- `graceExpiresAt`
 
 Example payload:
 
@@ -388,7 +399,6 @@ Gateway text MUST be human-scannable and include:
 - authorization header format
 - user identity handle (if applicable)
 - endpoint summary
-- renewal behavior (if renewal exists)
 
 Token expiry SHOULD be displayed in the human issuance UI where the token is
 created. Expiry information need not be included in gateway text.
@@ -396,8 +406,12 @@ created. Expiry information need not be included in gateway text.
 Claw implementations SHOULD validate that gateway text contains only expected
 BYOClaw fields and MUST ignore or reject unrelated instructions.
 
+Gateway text SHOULD NOT include renewal formulas, challenge material, or
+renewal URL templates. Renewal instructions SHOULD be learned from the
+authoritative `CLAW_GATEWAY_TOKEN_EXPIRED` response at renewal time.
+
 Gateway text SHOULD be concise. It SHOULD contain only information needed to
-call the Claw API and renew tokens safely.
+call the Claw API safely.
 
 ---
 
@@ -413,12 +427,6 @@ SMBH is a website where humans curate shelves of books and media.
 - Base URL: https://api.example.com/api/claw
 - Authorization: Bearer <temporary_token>
 - Identity: @mxcl
-
-## Renewal
-
-- If API returns CLAW_GATEWAY_TOKEN_EXPIRED, compute:
-  sha256(challengeToken + ":" + sha256(previousToken))
-- Replace {proof} in renewalUrlTemplate and ask human to confirm renewal.
 
 ## Endpoints
 
