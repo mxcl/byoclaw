@@ -329,6 +329,22 @@ p:last-child {
   letter-spacing: 0.04em;
 }
 
+.uses-example-box a {
+  color: #ffe84f;
+}
+
+.uses-example-box a::after {
+  background: #ffe84f;
+}
+
+.uses-example-box a:hover {
+  color: #fff38a;
+}
+
+.uses-example-box a:hover::after {
+  background: #fff38a;
+}
+
 .uses-example-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
