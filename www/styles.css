@@ -341,6 +341,16 @@ p:last-child {
   margin-top: 1rem;
 }
 
+.uses-grid > .placeholder:not(.uses-example-box) h3 {
+  font-size: 1.22rem;
+  line-height: 1.25;
+}
+
+.uses-grid > .placeholder:not(.uses-example-box) p {
+  font-size: 1.04rem;
+  line-height: 1.65;
+}
+
 .placeholder.uses-example-box {
   --placeholder-title-color: #ffe7bb;
   --placeholder-body-color: #c2ab82;
