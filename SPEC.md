@@ -208,6 +208,20 @@ Recommended pattern:
 /api/claw/*
 ```
 
+Endpoint discovery guidance:
+
+`GET /api/claw` SHOULD return a small discovery document, for example:
+
+```json
+{
+  "version": "1",
+  "endpoints": {
+    "me": "GET /me",
+    "shelves": "GET /shelves"
+  }
+}
+```
+
 The API SHOULD be additive and non-breaking. New versions MAY be introduced,
 for example `/api/claw/v2/*`.
 
