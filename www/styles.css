@@ -468,6 +468,39 @@ p:last-child {
   background: rgba(255,45,106,0.12);
 }
 
+.github-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  padding: 0.9rem 1.5rem;
+  border: 2px solid rgba(0,240,255,0.75);
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,45,106,0.28),
+    rgba(0,240,255,0.22)
+  );
+  box-shadow: 0 0 28px rgba(0,240,255,0.18);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.github-cta::after {
+  display: none;
+}
+
+.github-cta:hover {
+  color: #fff;
+  border-color: rgba(255,45,106,0.85);
+  box-shadow: 0 0 34px rgba(255,45,106,0.35);
+  transform: translateY(-1px) scale(1.02);
+}
+
 .footnote {
   display: inline-flex;
   align-items: center;
