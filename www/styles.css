@@ -310,6 +310,35 @@ p:last-child {
   margin-top: 1rem;
 }
 
+.uses-example-box {
+  --placeholder-title-color: #ffffff;
+  --placeholder-body-color: #d6eef9;
+  grid-column: 1 / -1;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0,240,255,0.8);
+  background: linear-gradient(
+    135deg,
+    rgba(0,240,255,0.1),
+    rgba(255,45,106,0.12)
+  );
+}
+
+.uses-example-box:hover {
+  border-color: rgba(255,45,106,0.9);
+  background: linear-gradient(
+    135deg,
+    rgba(0,240,255,0.15),
+    rgba(255,45,106,0.18)
+  );
+}
+
+.uses-example-box h3 {
+  font-size: 1.06rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 @media (max-width: 760px) {
   .uses-grid {
     grid-template-columns: 1fr;
