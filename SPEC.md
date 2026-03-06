@@ -149,6 +149,9 @@ Websites SHOULD store token hashes rather than raw tokens.
 Renewal is OPTIONAL for websites, but if implemented it MUST require
 human-confirmed action in an authenticated browser session.
 
+A renewal scheme MUST prove knowledge of the previous token without
+transmitting the previous token itself.
+
 ## Expiry behavior
 
 When a token is expired but still in renewal grace, APIs SHOULD return:
@@ -175,16 +178,29 @@ Example payload:
 }
 ```
 
+In this example, fields such as `proofAlgorithm`, `proofFormula`, and
+`renewalUrlTemplate` describe the reference profile. Implementations MAY use
+different fields or algorithms, provided the security property above is met.
+
 ## Renewal steps
 
 1. Claw receives `CLAW_GATEWAY_TOKEN_EXPIRED`.
-2. Claw computes proof from the previous token and `challengeToken`.
-3. Claw substitutes `{proof}` in `renewalUrlTemplate`.
-4. Claw asks the human to open the URL while signed in.
+2. Claw computes a renewal proof from local token material and server-provided
+   challenge data, without sending the previous token.
+3. Claw prepares the human-confirmation renewal URL or request.
+4. Claw asks the human to complete renewal while signed in.
 5. Website verifies proof against an expired token in grace for that user.
 6. Website rotates token and returns fresh gateway text.
 
 After grace expiry, renewal MUST fail and the token is invalid.
+
+## Reference Implementation (SMBH v1)
+
+SMBH v1 uses:
+
+`sha256(challengeToken + ":" + sha256(previousToken))`
+
+as the renewal proof formula.
 
 ## Human confirmation endpoints (reference profile)
 
