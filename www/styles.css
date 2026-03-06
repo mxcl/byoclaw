@@ -159,10 +159,9 @@ header .subtitle {
   text-wrap: pretty;
 }
 
-.build-summary {
-  max-width: 68ch;
-  margin: 0.8rem auto 0;
-  padding: 0.75rem 1rem;
+.build-summary-box {
+  grid-column: 1 / -1;
+  padding: 0.95rem 1.1rem;
   border: 1px solid rgba(255,45,106,0.42);
   border-radius: 12px;
   background: rgba(255,45,106,0.08);
@@ -171,7 +170,12 @@ header .subtitle {
   line-height: 1.6;
 }
 
-.build-summary strong {
+.build-summary-box p {
+  margin: 0;
+  color: inherit;
+}
+
+.build-summary-box strong {
   color: #fff;
 }
 
