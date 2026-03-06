@@ -153,15 +153,19 @@
 
       <section>
         <h2>Prompt Guidelines</h2>
-
-        <p>Prompts should be easily scannable by the user to prove there is no prompt injection attempts.</p>
+        <p>
+          Prompts should be easily scannable by the user to prove there is no prompt injection attempts.
+        </p>
         <p>
           The best way to do this is to be as concise as possible.
-          Endpoints should thus be named so the name, path and website description <b>alone</b> perfectly describe the purpose to the claw.</p>
+          Endpoints should thus be named so the name, path and website description <b>alone</b> perfectly describe the purpose to the claw.
           Additional docs should be minimal to prove no prompt injection.
         </p>
-
+        <p>
+          Enclose the text in triple backticks so it renders well when the human pastes it.
+        </p>
         <pre><code>
+          ```md
           # FooBar Temporary Gateway
 
           FooBar is a service that foos the bar.
@@ -175,7 +179,9 @@
 
           - /me
           - /me/friends
+          ```
         </code></pre>
+        <div class="footnote">EXAMPLE</div>
       </section>
 
       <div class="spec-assets-layout">
