@@ -3,8 +3,8 @@
 Version 0.1.0
 
 Bring Your Own Claw (BYOClaw) is a minimal specification that allows a user's
-Claw agent to temporarily access restricted website APIs using human-initiated
-authorization.
+OpenClaw (Claw) agent to temporarily access restricted website APIs using
+human-initiated authorization.
 
 BYOClaw lets websites expose agent-specific capabilities without granting full
 user credentials or broad API access.
