@@ -27,7 +27,7 @@ jobs:
 
       - name: Copy assets and fix URLs
         run: |
-          cp assets/*.webp assets/*.jpeg www/
+          cp assets/*.webp assets/*.jpeg assets/*.jpg www/
           sed -i 's|\.\./assets/|./|g' www/index.html
 
       - name: Setup Pages
