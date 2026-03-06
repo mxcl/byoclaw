@@ -346,6 +346,10 @@ p:last-child {
   margin-top: 0.9rem;
 }
 
+.uses-example-copy .uses-example-list + p {
+  margin-top: 1.25rem;
+}
+
 .uses-example-logo {
   width: clamp(96px, 14vw, 168px);
   height: auto;
