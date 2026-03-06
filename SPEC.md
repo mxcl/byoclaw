@@ -82,6 +82,18 @@ The Claw never receives the user's browser session cookie.
 
 ---
 
+# Security Model
+
+BYOClaw assumes:
+
+- The human controls the Claw agent.
+- Gateway text is only provided by trusted websites.
+- Claw agents do not automatically follow external instructions.
+- Tokens may be leaked through agent logs or prompts and must therefore be
+  short-lived.
+
+---
+
 # Human-Initiated Gateway Issuance
 
 A Claw Token MUST be created through an explicit human action.
