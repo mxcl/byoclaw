@@ -11,6 +11,13 @@ user credentials or broad API access.
 
 ---
 
+# Normative Language
+
+The key words "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" in this
+document are to be interpreted as described in RFC 2119.
+
+---
+
 # Goals
 
 BYOClaw is designed to:
@@ -54,7 +61,7 @@ A restricted API surface specifically designed for agents.
 A short-lived token allowing an agent to access the Claw API.
 
 **Gateway Text**
-The human-pasted instruction block that tells the Claw how to use the token.
+A human-pasted instruction block that tells the Claw how to use a Claw Token.
 
 ---
 
@@ -62,7 +69,7 @@ The human-pasted instruction block that tells the Claw how to use the token.
 
 BYOClaw follows a simple trust model.
 
-```
+```text
 Human Browser
   | authenticated session
   v
@@ -84,19 +91,38 @@ The Claw never receives the user's browser session cookie.
 
 # Security Model
 
+## Threat model
+
+BYOClaw explicitly considers:
+
+- leaked tokens in logs, prompts, or screenshots
+- replay of renewal artifacts over observed channels
+- malicious or malformed gateway text pasted by a human
+
+## Assumptions
+
 BYOClaw assumes:
 
-- The human controls the Claw agent.
-- Gateway text is only provided by trusted websites.
-- Claw agents do not automatically follow external instructions.
-- Tokens may be leaked through agent logs or prompts and must therefore be
-  short-lived.
+- the human controls the Claw implementation they use
+- websites provide authentic gateway text over authenticated sessions
+
+These assumptions are not complete controls. Implementations MUST still apply
+the controls in this specification.
+
+## Required controls
+
+- Claw Tokens MUST be short-lived.
+- Renewal challenges MUST be fresh and single-use.
+- Renewal proofs MUST be bound to a specific token and challenge.
+- Claw implementations SHOULD parse gateway text as structured data and MUST
+  NOT execute arbitrary instructions embedded in that text.
 
 ---
 
 # Human-Initiated Gateway Issuance
 
-A Claw Token MUST be created through an explicit human action.
+A Claw Token MUST be created through an explicit human action in an
+authenticated browser session.
 
 Typical flow:
 
@@ -122,25 +148,34 @@ Claw Tokens authorize calls to the Claw API.
 
 Claw Tokens MUST:
 
-- be short-lived
+- be generated from a cryptographically secure random source
+- provide at least 128 bits of entropy
+- be transmitted as bearer tokens
 - be scoped to the Claw API
-- be transmitted as a bearer token
-- expire automatically
+- expire automatically no later than 60 minutes after issuance
 
-Recommended lifetime:
+Websites SHOULD issue tokens with a shorter default lifetime (for example,
+10 minutes).
 
-```text
-10 minutes recommended
-60 minutes maximum
-```
+Websites SHOULD store token hashes rather than raw tokens at rest.
 
-Current reference deployment profile (SMBH v1):
+## Format and encoding
 
-- active TTL: 60 minutes
-- renewal grace period: 120 minutes after expiry
-- token value stored as hash at rest
+- Token format is implementation-defined.
+- Tokens MUST use an ASCII-safe encoding suitable for headers and copy/paste.
+- base64url without padding is RECOMMENDED.
+- Deployment-specific prefixes (for example `smbhclaw_`) MAY be used, but MUST
+  be documented and MUST NOT reduce entropy requirements.
 
-Websites SHOULD store token hashes rather than raw tokens.
+## Multiple simultaneous tokens
+
+Websites MAY allow multiple active Claw Tokens per user.
+
+If multiple active tokens are supported, websites MUST define and document:
+
+- maximum active tokens per user
+- whether limits are global or per Claw integration
+- whether rate limits are per token, per user, or both
 
 ---
 
@@ -149,8 +184,25 @@ Websites SHOULD store token hashes rather than raw tokens.
 Renewal is OPTIONAL for websites, but if implemented it MUST require
 human-confirmed action in an authenticated browser session.
 
-A renewal scheme MUST prove knowledge of the previous token without
-transmitting the previous token itself.
+## Security objective
+
+Renewal allows a Claw to prove possession of a prior token over a potentially
+logged or observed channel without sending that prior token itself.
+
+## Mandatory renewal properties
+
+A compliant renewal flow MUST satisfy all of the following:
+
+- The website MUST issue a fresh renewal challenge for each attempt.
+- A challenge MUST be single-use.
+- A challenge MUST be bound to one specific expired token (or token hash), user,
+  and renewal attempt context.
+- The challenge MUST expire quickly (5 minutes or less is RECOMMENDED).
+- Renewal proof verification MUST fail if the challenge is reused, expired,
+  malformed, or bound to a different token/user.
+- After successful renewal, the previous token MUST be invalidated.
+
+These rules prevent replay of leaked proof material during the grace window.
 
 ## Expiry behavior
 
@@ -166,51 +218,30 @@ Example payload:
 {
   "error": "CLAW_GATEWAY_TOKEN_EXPIRED",
   "expiredAt": "2026-03-06T01:46:10.000Z",
-  "renewalGraceMinutes": 120,
   "renewal": {
     "challengeToken": "f7D4...base64url...",
+    "challengeExpiresAt": "2026-03-06T01:51:10.000Z",
     "proofAlgorithm": "sha256",
     "proofFormula": "sha256(challengeToken + \":\" + sha256(previousToken))",
-    "renewalUrlTemplate": "https://example.com/?clawRenewProof={proof}&clawRenewToken=f7D4...",
-    "expiresAt": "2026-03-06T01:46:10.000Z",
+    "renewalUrlTemplate": "https://example.com/?clawRenewProof={proof}",
     "graceExpiresAt": "2026-03-06T03:46:10.000Z"
   }
 }
 ```
 
-In this example, fields such as `proofAlgorithm`, `proofFormula`, and
-`renewalUrlTemplate` describe the reference profile. Implementations MAY use
-different fields or algorithms, provided the security property above is met.
+Implementations MAY use different proof algorithms and response field names,
+provided the mandatory renewal properties are met.
 
 ## Renewal steps
 
 1. Claw receives `CLAW_GATEWAY_TOKEN_EXPIRED`.
-2. Claw computes a renewal proof from local token material and server-provided
-   challenge data, without sending the previous token.
-3. Claw prepares the human-confirmation renewal URL or request.
-4. Claw asks the human to complete renewal while signed in.
-5. Website verifies proof against an expired token in grace for that user.
+2. Claw computes renewal proof from local token material plus fresh challenge.
+3. Claw prepares a human-confirmation renewal URL or request.
+4. Human completes renewal while signed into the website.
+5. Website verifies challenge binding, proof validity, and grace eligibility.
 6. Website rotates token and returns fresh gateway text.
 
 After grace expiry, renewal MUST fail and the token is invalid.
-
-## Reference Implementation (SMBH v1)
-
-SMBH v1 uses:
-
-`sha256(challengeToken + ":" + sha256(previousToken))`
-
-as the renewal proof formula.
-
-## Human confirmation endpoints (reference profile)
-
-The SMBH v1 integration uses authenticated browser endpoints:
-
-- `GET /api/me/claw/gateway-renewal?proof=...&challengeToken=...`
-- `POST /api/me/claw/gateway-renewal/confirm`
-
-On success, confirmation returns a new token/gateway text and invalidates the
-previous token.
 
 ---
 
@@ -224,45 +255,94 @@ Recommended pattern:
 /api/claw/*
 ```
 
-Endpoint discovery guidance:
-
-`GET /api/claw` SHOULD return a small discovery document, for example:
-
-```json
-{
-  "version": "1",
-  "endpoints": {
-    "me": "GET /me",
-    "shelves": "GET /shelves"
-  }
-}
-```
-
-The API SHOULD be additive and non-breaking. New versions MAY be introduced,
-for example `/api/claw/v2/*`.
-
-Reference profile examples:
-
-```text
-GET    /api/claw/me
-GET    /api/claw/shelves
-GET    /api/claw/users/:username/shelves
-GET    /api/claw/followers
-POST   /api/claw/library/books
-POST   /api/claw/shelves/:shelfId/books
-PATCH  /api/claw/shelves/:shelfId/books/reorder
-DELETE /api/claw/shelves/:shelfId/books/:bookId
-```
-
 The Claw API SHOULD:
 
 - expose only agent-safe functionality
-- avoid high-risk account/security mutations
+- avoid high-risk account or security mutations
 - avoid sensitive personal data
 - keep mutations scoped to the token owner
 
-Claw APIs SHOULD enforce rate limits per token.
-Suggested baseline: 60 requests per minute.
+Websites MUST enforce rate limits on Claw API traffic and MUST document whether
+limits are evaluated per token, per user, or both.
+
+## Discovery document
+
+If discovery is provided, `GET /api/claw` MUST return JSON with the following
+minimum schema:
+
+- `byoclawSpecVersion` (string): spec version implemented by the website
+- `apiVersion` (string): website's Claw API version
+- `basePath` (string): base path for listed endpoints
+- `auth` (object): auth details
+- `endpoints` (array): endpoint descriptors
+
+`auth` MUST contain:
+
+- `type` (string), currently `"bearer"`
+- `header` (string), typically `"Authorization"`
+
+Each `endpoints[]` item MUST contain:
+
+- `name` (string)
+- `method` (string)
+- `path` (string, relative to `basePath`)
+
+Example:
+
+```json
+{
+  "byoclawSpecVersion": "0.1.0",
+  "apiVersion": "1",
+  "basePath": "/api/claw",
+  "auth": {
+    "type": "bearer",
+    "header": "Authorization"
+  },
+  "endpoints": [
+    {
+      "name": "me",
+      "method": "GET",
+      "path": "/me"
+    },
+    {
+      "name": "shelves",
+      "method": "GET",
+      "path": "/shelves"
+    }
+  ]
+}
+```
+
+---
+
+# Error Model
+
+BYOClaw APIs SHOULD return JSON errors with a stable `error` code string.
+
+The following codes are RECOMMENDED as a minimal interoperable vocabulary:
+
+- `CLAW_GATEWAY_TOKEN_MISSING`
+- `CLAW_GATEWAY_TOKEN_INVALID`
+- `CLAW_GATEWAY_TOKEN_EXPIRED`
+- `CLAW_GATEWAY_TOKEN_REVOKED`
+- `CLAW_GATEWAY_RATE_LIMITED`
+- `CLAW_GATEWAY_SCOPE_FORBIDDEN`
+- `CLAW_GATEWAY_RENEWAL_CHALLENGE_INVALID`
+- `CLAW_GATEWAY_RENEWAL_PROOF_INVALID`
+
+When rate limiting is triggered, APIs SHOULD return HTTP 429 and include
+`retryAfterSeconds`.
+
+---
+
+# Revocation
+
+Websites SHOULD provide a revocation mechanism in authenticated UI or API
+controls.
+
+If revocation is supported, revocation MUST immediately invalidate the target
+Claw Token and SHOULD invalidate any outstanding renewal challenges derived from
+that token.
 
 ---
 
@@ -291,7 +371,7 @@ Claw APIs SHOULD NOT expose:
 
 Low-risk content mutations MAY be supported, for example:
 
-- adding media to a shelf/library
+- adding media to a shelf or library
 - linking existing items into a shelf
 - reordering shelf items
 - removing an item from a shelf without deleting account data
@@ -309,14 +389,13 @@ Gateway text MUST be human-scannable and include:
 - token expiry
 - user identity handle (if applicable)
 - endpoint summary
-- expiry/renewal behavior (if renewal exists)
+- expiry and renewal behavior (if renewal exists)
 
-Guidance:
+Claw implementations SHOULD validate that gateway text contains only expected
+BYOClaw fields and MUST ignore or reject unrelated instructions.
 
-- concise prompts are a SHOULD, not yet a MUST
-- endpoint docs should be self-describing
-- responses should be predictable JSON
-- avoid hidden or indirect instructions
+Gateway text SHOULD be concise. It SHOULD contain only information needed to
+call the Claw API and renew tokens safely.
 
 ---
 
@@ -330,7 +409,7 @@ SMBH is a website where humans curate shelves of books and media.
 ## Credentials
 
 - Base URL: https://api.example.com/api/claw
-- Authorization: Bearer smbhclaw_TeStTeStTeStTeStTeStTeStTeStTeSt
+- Authorization: Bearer <temporary_token>
 - Expires At (UTC): 2026-03-06T01:46:10Z
 - Identity: @mxcl
 
@@ -338,7 +417,7 @@ SMBH is a website where humans curate shelves of books and media.
 
 - If API returns CLAW_GATEWAY_TOKEN_EXPIRED, compute:
   sha256(challengeToken + ":" + sha256(previousToken))
-- Replace {proof} in renewalUrlTemplate and ask user to click it.
+- Replace {proof} in renewalUrlTemplate and ask human to confirm renewal.
 
 ## Endpoints
 
@@ -356,7 +435,7 @@ SMBH is a website where humans curate shelves of books and media.
 
 # Example Flows
 
-## Initial Issuance
+## Initial issuance
 
 1. Human clicks BYOClaw button.
 2. Website returns token and gateway text.
@@ -373,50 +452,39 @@ SMBH is a website where humans curate shelves of books and media.
 
 ---
 
-# Future Work
+# Appendix A: SMBH v1 Reference Profile (Non-Normative)
+
+The following values are deployment-specific examples from SMBH v1 and are not
+normative BYOClaw requirements.
+
+- active TTL: 60 minutes
+- renewal grace period: 120 minutes after expiry
+- proof formula:
+  `sha256(challengeToken + ":" + sha256(previousToken))`
+- example endpoints:
+  - `GET /api/claw/me`
+  - `GET /api/claw/shelves`
+  - `GET /api/claw/users/:username/shelves`
+  - `GET /api/claw/followers`
+  - `POST /api/claw/library/books`
+  - `POST /api/claw/shelves/:shelfId/books`
+  - `PATCH /api/claw/shelves/:shelfId/books/reorder`
+  - `DELETE /api/claw/shelves/:shelfId/books/:bookId`
+
+---
+
+# Future Work (Non-Normative)
 
 Potential extensions include:
 
-* scoped permissions
-* tightly scoped long-term tokens
-* discovery endpoints
+- scoped permissions
+- tightly scoped long-term tokens
+- richer discovery metadata
 
-These features are not part of version 0.1.
+These features are not part of version 0.1.0.
 
 ---
 
 # Versioning
 
-BYOClaw follows semantic versioning.
-
-Version format:
-
-```
-MAJOR.MINOR.PATCH
-```
-
-Current version:
-
-```
-0.1.0
-```
-
----
-
-# Contributing
-
-The BYOClaw specification is an open source document.
-
-Contributions from humans and AI agents are welcome.
-
-Please check the issue tracker before submitting new proposals.
-
-Low-quality or abusive submissions may be removed.
-
----
-
-# License
-
-The BYOClaw specification is open and free to implement.
-
-```
+BYOClaw follows semantic versioning (`MAJOR.MINOR.PATCH`).
