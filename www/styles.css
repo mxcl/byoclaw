@@ -750,6 +750,10 @@ p:last-child {
   align-items: start;
 }
 
+.prompt-guidelines-layout > * {
+  min-width: 0;
+}
+
 .prompt-guidelines-main {
   max-width: 33em;
 }
@@ -758,8 +762,14 @@ p:last-child {
   max-width: 33em;
 }
 
+.prompt-guidelines-example {
+  min-width: 0;
+}
+
 .prompt-guidelines-example pre {
   margin-bottom: 0;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Code block */
@@ -977,6 +987,16 @@ footer a::after {
 
   .prompt-guidelines-layout {
     gap: 1rem;
+  }
+
+  .prompt-guidelines-example pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .prompt-guidelines-example pre code {
+    white-space: inherit;
   }
 
   pre {
