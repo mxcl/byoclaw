@@ -932,6 +932,7 @@ footer a::after {
   .logo {
     font-size: clamp(2.4rem, 14vw, 4rem);
     line-height: 0.95;
+    margin-top: 0.4rem;
   }
 
   .title-plushie {
