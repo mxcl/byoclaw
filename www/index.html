@@ -377,6 +377,12 @@ of books.
         const heading = document.getElementById('usecase-appless-heading');
         if (!heading) return;
 
+        if (window.matchMedia('(max-width: 640px)').matches) {
+          heading.style.removeProperty('white-space');
+          heading.style.removeProperty('font-size');
+          return;
+        }
+
         const containerWidth = heading.clientWidth;
         if (!containerWidth) return;
 
@@ -401,13 +407,29 @@ of books.
         heading.style.fontSize = `${best.toFixed(2)}px`;
       }
 
+      let headingFitScheduled = false;
+      function scheduleHeadingFit() {
+        if (headingFitScheduled) return;
+        headingFitScheduled = true;
+
+        requestAnimationFrame(() => {
+          headingFitScheduled = false;
+          fitApplessHeadingToWidth();
+        });
+      }
+
       window.addEventListener('load', () => {
         if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(fitApplessHeadingToWidth);
+          document.fonts.ready.then(scheduleHeadingFit);
           return;
         }
 
-        fitApplessHeadingToWidth();
+        scheduleHeadingFit();
+      });
+
+      window.addEventListener('resize', scheduleHeadingFit, { passive: true });
+      window.addEventListener('orientationchange', scheduleHeadingFit, {
+        passive: true,
       });
     </script>
   </body>
