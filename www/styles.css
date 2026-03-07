@@ -352,6 +352,18 @@ p:last-child {
   margin-top: 1rem;
 }
 
+.quick-start-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.quick-start-box {
+  --placeholder-title-color: #d6f8ff;
+  --placeholder-body-color: #cde5ed;
+}
+
 .uses-grid > .placeholder:not(.uses-example-box) h3 {
   font-size: 1.22rem;
   line-height: 1.25;
@@ -438,6 +450,10 @@ p:last-child {
 
 @media (max-width: 760px) {
   .uses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-start-grid {
     grid-template-columns: 1fr;
   }
 
@@ -967,7 +983,8 @@ footer a::after {
   }
 
   .spec-grid,
-  .uses-grid {
+  .uses-grid,
+  .quick-start-grid {
     margin-top: 0.8rem;
     gap: 0.8rem;
   }
