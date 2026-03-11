@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bring Your Own Claw — The Future is App-less</title>
+    <meta
+      name="description"
+      content="Bring your own OpenClaw to the web."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bring Your Own Claw — The Future is App-less" />
+    <meta
+      property="og:description"
+      content="Bring Your Own Claw is a stepping stone to an app-less future: letting humans bring their OpenClaws to the existing web."
+    />
+    <meta property="og:image" content="/preview.jpg" />
+    <meta property="og:image:alt" content="BYOClaw preview image" />
+    <meta property="og:url" content="https://byoclaw.dev/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bring Your Own Claw" />
+    <meta
+      name="twitter:description"
+      content="Bring Your Own Claw is a stepping stone to an app-less future: letting humans bring their OpenClaws to the existing web."
+    />
+    <meta name="twitter:image" content="/preview.jpg" />
+    <meta name="twitter:image:alt" content="BYOClaw preview image" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="aurora"></div>
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="scanlines"></div>
+    <main class="page">
+      <a
+        class="github-corner-link"
+        href="https://github.com/mxcl/byoclaw"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
+      <header>
+        <div class="title-row">
+          <h1 class="logo">BYOClaw</h1>
+          <img
+            class="title-plushie"
+            src="../assets/plushie.webp"
+            alt="BYOClaw plushie"
+          />
+        </div>
+        <p class="tagline">
+          Bring your <em>own</em> OpenClaw to the web
+        </p>
+        <p class="subtitle">
+          Bring Your Own Claw is a specification for <i>builders</i> that lets <i>humans</i>
+          request temporary access to a restricted API on a website for their OpenClaw.
+        </p>
+
+      </header>
+
+      <section>
+        <h2>Usecases</h2>
+        <div class="uses-grid">
+          <article class="placeholder">
+            <h3>Bring Your Own AI</h3>
+            <p>
+              Nowadays websites are expected to have ever more complex and niche functionality.
+              While ever more achievable with the aid of agents, every additional niche function clutters the user interface making the core functionality harder to use and comprehend.
+            </p>
+            <p style="margin-top: 0.5em; font-weight: 700;">
+              BYOClaw lets websites delegate richer, niche, and highly personalized
+              functionality to a human’s OpenClaw.
+            </p>
+            <ul class="req-list">
+              <li>Websites focus on the core user interfaces that represent their unique data and networks.</li>
+              <li>Humans bring their own AI to work with the data in specialized ways.</li>
+            </ul>
+          </article>
+          <article class="placeholder usecase-appless">
+            <h3 id="usecase-appless-heading">The Future is App<i style="opacity: 0.617">less</i></h3>
+            <p>
+              Claw-only Services are single-page websites with a BYOClaw button.
+              They expose functionality only through Claw APIs, and your Claw
+              builds your own local interface customized entirely for you.
+            </p>
+            <p style="margin-top: 0.5em">
+              In our opinion, <i>the future is app-less</i>.
+            </p>
+          </article>
+          <article class="placeholder uses-example-box">
+            <h3><span class="uses-example-label">EXAMPLE</span>&nbsp;&nbsp;Bring Your Own AI</h3>
+            <div class="uses-example-layout">
+              <div class="uses-example-copy">
+                <p>
+                  At <a href="https://supermassivebookhole.com">Supermassive Book Hole</a> humans curate collections of books and other media.
+                  SMBH is able to focus on its beautiful & simple user interface by outsourcing features that would add visual complexity to BYOClaw.
+                  For example, with BYOClaw a user can:
+                </p>
+                <ul class="req-list uses-example-list">
+                  <li>
+                    Compare their collection with other users and build a shared
+                    reading journey
+                  </li>
+                  <li>
+                    Ask for one recommendation from a friend or influencer based
+                    on what the Claw knows about them
+                  </li>
+                  <li>
+                    Import books from GoodReads, Wikipedia, their local library’s API… anywhere the Claw can access.
+                  </li>
+                </ul>
+                <p>
+                  SMBH provides the data, interfaces and the “meeting point” for humans to
+                  share their tastes while their Claws do the heavy lifting on how to best use that
+                  data for their humans’ needs.
+                </p>
+              </div>
+              <img
+                class="uses-example-logo"
+                src="../assets/smbh.webp"
+                alt="Supermassive Book Hole logo"
+              />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="quick-start-section">
+        <h2>Quick Start</h2>
+        <div class="quick-start-grid">
+          <article class="placeholder quick-start-box">
+            <h3>Demo</h3>
+            <p>
+              See it in action at
+              <a href="https://supermassivebookhole.com">supermassivebookhole.com</a>.
+            </p>
+          </article>
+          <article class="placeholder quick-start-box">
+            <h3>Implement</h3>
+            <p>
+              Tell your claw to <code>implement byoclaw.dev</code>.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Specification Overview</h2>
+        <div class="spec-grid">
+          <article class="placeholder placeholder-core">
+            <h3>Twin Fundamentals</h3>
+            <ol class="req-list">
+              <li>A restricted, separate api for OpenClaws</li>
+              <li>A prompt the human gives their Claw</li>
+            </ol>
+          </article>
+          <article class="build-summary-box">
+            <h3>What You Build</h3>
+            <p>
+              Websites implement an <code>/api/claw/*</code> endpoint and a token+prompt issuance button.
+              OpenClaws consume gateway text.
+            </p>
+            <p style="margin-top: 0.8em">
+              Tell your claw: <code>Implement byoclaw.dev</code>
+            </p>
+          </article>
+          <article class="placeholder">
+            <h3>Human-Initiated Token Exchange</h3>
+            <p>
+              A claw token can only be obtained by exchanging a
+              human-instigated login token (ie. a website cookie).
+            </p>
+            <p style='font-size: smaller; font-style: italic; opacity: 0.617'>
+              This happens between the human’s browser and your API: the Claw never sees the human’s cookie.
+            </p>
+          </article>
+          <article class="placeholder">
+            <h3>Short-Lived Tokens</h3>
+            <p>
+              Claw tokens are short-lived (we suggest 10 minutes, never more
+              than 60 minutes).
+            </p>
+          </article>
+          <article class="placeholder">
+            <h3>No Destructive Actions</h3>
+            <p>Claws cannot do destructive or dangerous actions.</p>
+          </article>
+          <article class="placeholder">
+            <h3>No Sensitive Data</h3>
+            <p>Claws should not have access to sensitive data.</p>
+          </article>
+          <article class="placeholder">
+            <h3>Separate API Surface</h3>
+            <p>
+              The API doesn’t have to be a separate subdomain, but an exclusive
+              API base path is sufficient.
+            </p>
+          </article>
+
+          <article class="placeholder">
+            <h3>Human-Scannable Prompt Spec</h3>
+            <p>
+              We have a specification for prompts that should be adhered to so
+              a human can scan it and see it is mundane.
+            </p>
+          </article>
+          <article class="placeholder placeholder-feature">
+            <h3>Token Renewal</h3>
+            <p>
+              Claw tokens can be renewed.
+              Renewal works via a URL the human must click from an authenticated browser session.
+            </p>
+          </article>
+          <article class="placeholder spec-full-box">
+            <h3>Read the Full Specification</h3>
+            <p>
+              The overview above highlights the key principles. For complete
+              details, examples, and versioned updates, use the canonical
+              <code>SPEC.md</code> document.
+            </p>
+            <a
+              class="spec-full-link"
+              href="https://github.com/mxcl/byoclaw/blob/main/SPEC.md"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open SPEC.md
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="prompt-guidelines">
+        <h2>Prompt Guidelines</h2>
+        <div class="prompt-guidelines-layout">
+          <div class="prompt-guidelines-main">
+            <p>
+              Prompts should be easily scannable by the human to prove there is no prompt injection attempts.
+            </p>
+            <p>
+              The best way to do this is to be as concise as possible.
+            </p>
+            <ul class="req-list prompt-guidelines-list">
+              <li>Endpoints should thus be named so the method & path (together with the website description) <b>alone</b> perfectly describe the purpose to the claw.</li>
+              <li>Additional docs should be minimal to prove no prompt injection.</li>
+              <li>JSON responses should explain themselves to the Claw without requiring documentation.</li>
+              <li>Add HTTP Headers as required to assist the Claw also.</li>
+            </ul>
+            <p>
+              Enclose the text in triple backticks so it renders well when the human pastes it.
+            </p>
+          </div>
+          <div class="prompt-guidelines-example">
+            <pre><code>
+```md
+# Supermassive Book Hole — Temporary Gateway
+
+SMBH is a website where humans curate virtual shelves
+of books.
+
+## Creds
+- Username: @mxcl
+- Authorization: Bearer smbhclaw_…
+- Base URL: https://api.example.com/api/claw
+
+## APIs
+- GET /:username
+- GET /:username/following
+- GET /:username/followers
+- POST /:shelf-id/:media-type
+  Fields: {title, author, shelf}
+
+### `:media-type`
+["book", "movie", "show", "game", "album", "single"]
+```
+        </code></pre>
+            <div class="footnote">EXAMPLE</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="spec-assets-layout">
+        <div class="spec-assets-left">
+          <section>
+            <h2>Specification Development</h2>
+            <p>
+              The specification is a living, open source document.
+            </p>
+            <p>
+              Please have your Claw check the issue tracker for existing issues
+              before opening a new one.
+            </p>
+            <p>
+              Contributions are welcome from both humans and AI.
+              Please ensure contributions add value to the specification.
+              Low-quality submissions may be removed.
+            </p>
+            <a
+              class="github-cta"
+              href="https://github.com/mxcl/byoclaw"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on GitHub
+            </a>
+          </section>
+
+          <section>
+            <h2>Specification Version</h2>
+            <p>The BYOClaw specification is currently at version <b style='color: white'>0.1.0</b></p>
+          </section>
+        </div>
+
+        <section class="spec-assets-right">
+          <h2>Assets</h2>
+          <p>
+            You can either download these buttons or link to them directly. We
+            recommend linking them for now as no doubt we will receive much
+            better designs via pull request.
+          </p>
+          <div class="asset-grid">
+            <article class="asset-card">
+              <img src="../assets/button.webp" alt="BYOClaw button (WebP)"/>
+              <h3>button</h3>
+              <p class="asset-meta">WebP: 14.4 kB · JPEG: 66.4 kB</p>
+              <div class="asset-actions">
+                <a class="asset-action" href="../assets/button.webp">WebP Link</a>
+                <a class="asset-action" href="../assets/button.webp" download>WebP Download</a>
+                <a class="asset-action" href="../assets/button.jpeg">JPEG Link</a>
+                <a class="asset-action" href="../assets/button.jpeg" download>JPEG Download</a>
+              </div>
+            </article>
+          </div>
+          <pre style="margin-top: 1.2em;"><code>
+// HTML Embed
+
+```html
+&lt;img src="https://byoclaw.dev/button.webp"
+  style="max-height: 45px; width: auto; border-radius: 4px"
+  alt="BYOClaw button" /&gt;
+```
+
+<img src="../assets/button.webp" alt="BYOClaw button (WebP)" style="max-height: 45px; width: auto; border-radius: 4px" />
+          </code></pre>
+
+        </section>
+      </div>
+
+      <section>
+        <h2>Future Work</h2>
+        <div class="spec-grid">
+          <article class="placeholder placeholder-feature">
+            <h3>Tightly-Scoped Longer Term Tokens</h3>
+            <ul class="req-list">
+              <li>NOW: your phone buzzes for every new comment on a post.</li>
+              <li>
+                WITH BYOClaw: your phone only buzzes if your Claw decides the
+                comment interests you.
+              </li>
+            </ul>
+            <p style="margin-top: 0.8em">
+              Your Claw gets a tightly scoped token for new comments on only
+              that post. It sets up a new cron job to poll. If the comment
+              interests you, it buzzes your phone, otherwise it goes to
+              <code>/dev/null</code>.
+            </p>
+          </article>
+          <article class="placeholder placeholder-feature">
+            <h3>Scoped Permissions</h3>
+            <p>
+              Define granular, revocable capabilities so a token can be limited
+              to a narrow action set like comment triage or one shelf.
+            </p>
+          </article>
+          <article class="placeholder placeholder-feature">
+            <h3>Richer Discovery Metadata</h3>
+            <p>
+              Publish machine-readable metadata that helps Claws discover the
+              API surface, policy limits, and renewal flows with minimal prompt
+              overhead.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Creator / Maintainer</h2>
+        <p>
+          <a href="https://mxcl.dev">Howell, Max</a> — British-American software
+          engineer and open-source developer, best known as the creator of
+          Homebrew.
+        </p>
+      </section>
+
+      <footer>
+        <p>◇ <a href="https://byoclaw.dev">byoclaw.dev</a> ◇</p>
+      </footer>
+    </main>
+    <script>
+      function fitApplessHeadingToWidth() {
+        const heading = document.getElementById('usecase-appless-heading');
+        if (!heading) return;
+
+        if (window.matchMedia('(max-width: 640px)').matches) {
+          heading.style.removeProperty('white-space');
+          heading.style.removeProperty('font-size');
+          return;
+        }
+
+        const containerWidth = heading.clientWidth;
+        if (!containerWidth) return;
+
+        heading.style.whiteSpace = 'nowrap';
+
+        let low = 12;
+        let high = 120;
+        let best = 12;
+
+        while (low <= high) {
+          const mid = (low + high) / 2;
+          heading.style.fontSize = `${mid}px`;
+
+          if (heading.scrollWidth <= containerWidth) {
+            best = mid;
+            low = mid + 0.25;
+          } else {
+            high = mid - 0.25;
+          }
+        }
+
+        heading.style.fontSize = `${best.toFixed(2)}px`;
+      }
+
+      let headingFitScheduled = false;
+      function scheduleHeadingFit() {
+        if (headingFitScheduled) return;
+        headingFitScheduled = true;
+
+        requestAnimationFrame(() => {
+          headingFitScheduled = false;
+          fitApplessHeadingToWidth();
+        });
+      }
+
+      window.addEventListener('load', () => {
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(scheduleHeadingFit);
+          return;
+        }
+
+        scheduleHeadingFit();
+      });
+
+      window.addEventListener('resize', scheduleHeadingFit, { passive: true });
+      window.addEventListener('orientationchange', scheduleHeadingFit, {
+        passive: true,
+      });
+    </script>
+  </body>
+</html>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5E0V275QM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M5E0V275QM');
+</script>
