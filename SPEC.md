@@ -482,7 +482,9 @@ configuration.
 
 The Prompt MUST end with:
 
-> adheres to byoclaw.dev vX.Y.Z
+```md
+> Adheres to byoclaw.dev vX.Y.Z
+```
 
 Related capabilities should be combined into fewer, cohesive APIs whenever
 possible.
