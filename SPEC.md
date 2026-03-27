@@ -1,6 +1,6 @@
 # BYOClaw Specification
 
-Version 0.1.0
+Version 0.2.0-alpha
 
 Bring Your Own Claw (BYOClaw) is a minimal specification that allows a user's
 OpenClaw (Claw) agent to temporarily access restricted website APIs using
@@ -36,7 +36,7 @@ BYOClaw does not attempt to:
 
 - replace OAuth
 - provide full identity federation
-- provide long-lived agent credentials
+- standardize general-purpose long-lived agent credentials
 - permit high-risk destructive account actions
 
 BYOClaw is intentionally minimal.
@@ -136,7 +136,7 @@ At no point should the Claw receive:
 
 - user session cookies
 - login credentials
-- long-lived credentials
+- the user's primary long-lived account credentials
 
 ---
 
@@ -335,7 +335,7 @@ Example:
 
 ```json
 {
-  "byoclawSpecVersion": "0.1.0",
+  "byoclawSpecVersion": "0.2.0-alpha",
   "apiVersion": "1",
   "basePath": "/api/claw",
   "auth": {
@@ -387,6 +387,114 @@ controls.
 If revocation is supported, revocation MUST immediately invalidate the target
 Claw Token and SHOULD invalidate any outstanding renewal challenges derived from
 that token.
+
+---
+
+# PRELIMINARY: Long-Term Tokens
+
+This section is PRELIMINARY and non-normative. It documents an expected
+integration pattern for background synchronization, but it does not yet
+standardize a required issuance flow, response schema, discovery metadata, or
+error vocabulary for long-term tokens.
+
+BYOClaw continues to standardize short-lived Claw Tokens as the core
+interoperable mechanism. A long-term token, if a website offers one, is a
+separate credential used by a client integration after an explicit human
+authorization step. It is not a browser session token, and it is not the same
+thing as a short-lived Claw Token.
+
+## Motivation
+
+Some client apps need ongoing access after the human has finished the initial
+interactive setup. Clawlicious is the motivating example for this section.
+
+Clawlicious polls a website for events over time so it can ingest new activity
+in the background. A short-lived interactive Claw Token is not sufficient for
+that workflow because the token expires long before the next scheduled polls.
+A long-term token lets Clawlicious continue polling and ingesting events until
+the token is revoked or rotated.
+
+## Rationale
+
+This preliminary section exists to document the shape of a Clawlicious-style
+integration without prematurely freezing the protocol. The immediate need is
+background event polling: authorize once in a human-visible flow, then let the
+client continue low-risk polling until the integration is revoked, expires, or
+is rotated.
+
+## Expected integration pattern
+
+The following flow is an operational example of how a website MAY support
+Clawlicious for recurring event polling.
+
+1. Human signs into the website in a browser.
+2. Human explicitly authorizes Clawlicious for background event polling.
+3. Website issues a short-lived Claw Token for the interactive bootstrap step
+   and MAY also issue a separate long-term token scoped only to the polling
+   integration.
+4. Clawlicious stores the long-term token in secure local storage appropriate
+   to the platform, not in prompts, logs, screenshots, or clipboard history.
+5. On its recurring schedule, Clawlicious calls the website's event polling
+   endpoint with the long-term token and ingests any new events.
+6. If the token is revoked, expired, or rotated, polling fails closed and
+   Clawlicious prompts the human to reauthorize rather than silently widening
+   access or falling back to the browser session.
+
+Worked example:
+
+1. Human clicks "Connect Clawlicious for background sync".
+2. Website shows the requested scope, for example "read events for shelf
+   updates", plus expiry, rotation, and revoke controls.
+3. Human approves.
+4. Website returns a long-term token that Clawlicious stores in the system
+   keychain.
+5. Every 10 minutes, Clawlicious calls `GET /api/claw/events?cursor=...` with
+   `Authorization: Bearer <long_term_token>`.
+6. Clawlicious stores the returned cursor and continues polling over time.
+7. If the website returns a revoked, expired, or rotated-token response,
+   Clawlicious stops background polling, marks the integration unhealthy, and
+   asks the human to reconnect.
+
+## Security constraints and tradeoffs
+
+Long-term tokens, if implemented, SHOULD follow these constraints:
+
+- least privilege: scope the token narrowly to the specific integration task,
+  such as polling events, rather than general account access
+- revocability: provide a clear user-facing revoke control that invalidates the
+  token quickly
+- rotation: allow token replacement without requiring a new browser login for
+  every poll and invalidate the previous token after rotation
+- secure storage by the client: require storage in platform-appropriate secret
+  storage and avoid prompt text, logs, or plaintext config files
+- auditability and visibility to the user: show active long-term integrations,
+  scopes, creation time, last use, and revoke controls in authenticated UI
+- separation of credential types: keep browser session tokens, short-lived
+  Claw Tokens, and long-term integration tokens distinct in purpose and UI
+
+Websites SHOULD prefer expiry plus revocation over indefinite validity.
+Clients SHOULD treat long-term tokens as high-value secrets because they are
+designed for unattended use.
+
+## Example representation
+
+The wire format is not standardized by this section, but a deployment might
+represent an issued long-term token like this:
+
+```json
+{
+  "tokenType": "integration",
+  "token": "clawlt_7wYx...base64url...",
+  "scope": ["events:read"],
+  "integration": "clawlicious",
+  "issuedAt": "2026-03-27T14:00:00Z",
+  "expiresAt": "2026-06-25T14:00:00Z"
+}
+```
+
+This example is descriptive only. This section does not standardize field
+names, token prefixes, issuance endpoints, polling endpoints, cursor formats,
+or rotation semantics beyond the general expectations described above.
 
 ---
 
@@ -570,10 +678,10 @@ normative BYOClaw requirements.
 Potential extensions include:
 
 - scoped permissions
-- tightly scoped long-term tokens
+- a standardized profile for long-term integration tokens
 - richer discovery metadata
 
-These features are not part of version 0.1.0.
+These features are not fully standardized in version 0.2.0-alpha.
 
 ---
 

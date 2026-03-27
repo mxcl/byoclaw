@@ -349,7 +349,7 @@ of books.
 
           <section>
             <h2>Specification Version</h2>
-            <p>The BYOClaw specification is currently at version <b style='color: white'>0.1.0</b></p>
+            <p>The BYOClaw specification is currently at version <b style='color: white'>0.2.0-alpha</b></p>
           </section>
         </div>
 
@@ -393,19 +393,19 @@ of books.
         <h2>Future Work</h2>
         <div class="spec-grid">
           <article class="placeholder placeholder-feature">
-            <h3>Tightly-Scoped Longer Term Tokens</h3>
+            <h3>Standardized Long-Term Token Profile</h3>
             <ul class="req-list">
-              <li>NOW: your phone buzzes for every new comment on a post.</li>
+              <li>NOW: document a careful preliminary pattern for background polling integrations.</li>
               <li>
-                WITH BYOClaw: your phone only buzzes if your Claw decides the
-                comment interests you.
+                NEXT: standardize issuance, visibility, rotation, and revocation
+                semantics for those integrations.
               </li>
             </ul>
             <p style="margin-top: 0.8em">
-              Your Claw gets a tightly scoped token for new comments on only
-              that post. It sets up a new cron job to poll. If the comment
-              interests you, it buzzes your phone, otherwise it goes to
-              <code>/dev/null</code>.
+              The motivating case is a Clawlicious-style client that polls for
+              events in the background without requiring a fresh interactive
+              login for every sync, while still staying tightly scoped and
+              user-revocable.
             </p>
           </article>
           <article class="placeholder placeholder-feature">
